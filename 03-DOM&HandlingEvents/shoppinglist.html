@@ -4,23 +4,49 @@
 <head>
     <title>Shopping List</title>
     <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
     <h1>Shopping List</h1>
     <p>
         New item: <input type="text" name="item">
-        <button type="button">Add</button>
+        <button type="button" onclick="add(document.querySelector('input[name=item]').value)">Add</button>
     </p>
     <h3>List of items</h3>
     <ol>
-        <li>cooking oil</li>
+        <!-- <li>cooking oil</li>
         <li>breakfast cereal</li>
-        <li>bread</li>
+        <li>bread</li> -->
     </ol>
 
     <script>
-    	// a JavaScript code here ...
+        function remove(item) {
+            item.remove();
+        }
+
+        function add(value) {
+            // skip empty values
+            if (!value) return;
+
+            var list = document.getElementsByTagName("ol")[0];
+            var item = document.createElement("li");
+            item.appendChild(document.createTextNode(value));
+            list.appendChild(item);
+
+            // add remove event
+            $(item).dblclick(function () {
+                remove(this);
+            });
+
+            // clear input
+            document.querySelector('input[name=item]').value = '';
+        }
+
+        // add default values
+        add('cooking oil');
+        add('breakfast cereal');
+        add('bread');
 
     </script>
 </body>

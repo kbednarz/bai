@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Typing test</title>
-		<meta charset="UTF-8">
-	</head>
-	<body>
-		<h1>How fast are your fingers?</h1>
-		<h3>You have 30 seconds. Just start typing...</h3>
-		<p>Nam strzelać nie kazano. - Wstąpiłem na działo<br>
+
+<head>
+	<title>Typing test</title>
+	<meta charset="UTF-8">
+</head>
+
+<body>
+	<h1>How fast are your fingers?</h1>
+	<h3>You have 30 seconds. Just start typing...</h3>
+	<p id="ref">Nam strzelać nie kazano. - Wstąpiłem na działo<br>
 		I spójrzałem na pole; dwieście armat grzmiało.<br>
 		Artyleryi ruskiej ciągną się szeregi,<br>
 		Prosto, długo, daleko, jako morza brzegi;<br>
@@ -18,14 +20,36 @@
 		Nasypana iskrami bagnetów. Jak sępy<br>
 		Czarne chorągwie na śmierć prowadzą zastępy.<br>
 		Przeciw nim sterczy biała, wąska, zaostrzona,<br>
-		Jak głaz bodzący morze, reduta Ordona.</p>
-		
-		<textarea rows="15" cols="50"></textarea><br>
-		
-		<script>
-			// a JavaScript code here ...
-			
-		</script>
-		
-	</body>
+		Jak głaz bodzący morze, reduta Ordona.
+	</p>
+
+	<textarea id="val" rows="15" cols="50" onkeydown="checkValue(event)"></textarea><br>
+
+	<p id="timeResult"></p>
+
+	<script>
+		var reference = document.getElementById("ref").innerText;
+		var text = document.getElementById("val");
+		var startTime;
+
+		function displayTime() {
+			text.setAttribute('disabled', true);
+			document.getElementById("timeResult").innerText = `You typed ${text.value.split(' ').length} words and ${text.value.length} characters.`;
+		}
+
+		function checkValue(e) {
+			if (!startTime) {
+				setTimeout(displayTime, 1000 * 30);
+			}
+
+			if (!reference.startsWith(text.value) && e.key !== 'Backspace') {
+				e.preventDefault();
+				return;
+			}
+		}
+
+	</script>
+
+</body>
+
 </html>

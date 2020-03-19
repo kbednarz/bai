@@ -9,16 +9,19 @@
 <body>
 	<h1>Filling in a form</h1>
 	<form>
-		<p>University:<br><input type="text"></p>
-		<p>Address:<br><input type="text"></p>
-		<button type="button">Hint</button>
+		<p>University:<br><input type="text" name="uni"></p>
+		<p>Address:<br><input type="text" name="addr"></p>
+		<button type="button" onclick="hint()">Hint</button>
 	</form>
 
 	<script>
-		// a JavaScript code here ...
 		var university = "Cracow University of Economics";
 		var address = "Rakowicka 27, Krakow, POLAND";
 
+		function hint() {
+			document.querySelector('input[name=uni]').value = university;
+			document.querySelector('input[name=addr]').value = address;
+		}
 	</script>
 </body>
 

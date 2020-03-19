@@ -1,13 +1,48 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Create DOM elements</title>
-		<meta charset="UTF-8">
-	</head>
-	<body>
-		<script>
-			// a JavaScript code here ...
-			
-		</script>
-	</body>
+
+<head>
+	<title>Create DOM elements</title>
+	<meta charset="UTF-8">
+	<style>
+		table {
+			border: 1;
+			border-collapse: collapse;
+		}
+		table,th,td {
+			border: 1px solid black;
+		}
+		td {
+			width: 100px;
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body>
+	<script>
+		function addTable() {
+			var myTableDiv = document.getElementsByTagName("body")[0];
+
+			var table = document.createElement('table');
+			table.style = 'table';
+			var tableBody = document.createElement('tbody');
+			table.appendChild(tableBody);
+
+			for (var i = 0; i < 2; i++) {
+				var tr = document.createElement('tr');
+				tableBody.appendChild(tr);
+
+				for (var j = 0; j < 2; j++) {
+					var td = document.createElement('td');
+					td.appendChild(document.createTextNode(i + j));
+					tr.appendChild(td);
+				}
+			}
+			myTableDiv.appendChild(table);
+		}
+		addTable();
+	</script>
+</body>
+
 </html>

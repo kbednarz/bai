@@ -1,27 +1,54 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Pink Floyd</title>
-		<meta charset="UTF-8">
-	</head>
-	<body>
-		<h1>Another Brick in the Wall</h1>
-		<h3>Pink Floyd</h3>
-		<p>We don't need no education<br>
+
+<head>
+	<title>Pink Floyd</title>
+	<meta charset="UTF-8">
+</head>
+
+<body onclick="setYellowBackground(this)">
+	<h1 onclick="appendToTitle(this)">Another Brick in the Wall</h1>
+	<h3 onclick="displayDesc()">Pink Floyd</h3>
+	<p id="lyrics" onclick="setItalic(this)">We don't need no education<br>
 		We don't need no thought control<br>
 		No dark sarcasm in the classroom<br>
 		Teachers leave them kids alone<br>
 		Hey! Teachers! Leave them kids alone<br>
 		All in all it's just another brick in the wall<br>
 		All in all you're just another brick in the wall</p>
-		
-		<p style="visibility: hidden;">Pink Floyd were an English rock band formed in London.<br>
+
+	<p id="desc" onclick="showImage(this)" style="visibility: hidden;">Pink Floyd were an English rock band formed in
+		London.<br>
 		They achieved international acclaim with their progressive<br>
-		and psychedelic music.</p>
-		
-		<script>
-			// a JavaScript code here ...
-			
-		</script>
-	</body>
+		and psychedelic music.<br></p>
+
+	<script>
+		function appendToTitle(element) {
+			element.innerText += ' (Part2)';
+		}
+
+		function displayDesc() {
+			document.getElementById("desc").style.visibility = 'visible';
+		}
+
+		function setItalic(element) {
+			element.style['font-style'] = 'italic';
+		}
+
+		function setYellowBackground(element) {
+			element.style.background = 'yellow';
+		}
+
+		function showImage(element) {
+			var img = document.createElement('img');
+			img.src = 'https://upload.wikimedia.org/wikipedia/en/d/d6/Pink_Floyd_-_all_members.jpg';
+			element.appendChild(img);
+		}
+
+		document.getElementById('lyrics').addEventListener('copy', (event) => {
+			window.alert('All rights reserved');
+		});
+	</script>
+</body>
+
 </html>
