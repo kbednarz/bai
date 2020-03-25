@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Datatables</title>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+</head>
+
+<body>
+    <h1>Datatables</h1>
+    <input type="button" value="Load" onclick="load()" style="margin-bottom: 20px;">
+    <table id="ppl-table" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Age</th>
+                <th>Country</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        var table;
+        function load() {
+            $.ajax({
+                dataType: 'json',
+                url: "https://raw.githubusercontent.com/kbednarz/bai/solutions/04-JSON%26DataTransfer/people.json", success: function (result) {
+                    // clear table
+                    table.rows().remove();
+                    // load data
+                    result.forEach(e => {
+                        table.row.add([
+                            e.name,
+                            e.surname,
+                            e.age,
+                            e.country,
+                            e.email
+                        ]).draw(false);
+                    });
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            table = $('#ppl-table').DataTable();
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,18 +1,34 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Student</title>
-		<meta charset="UTF-8">
-	</head>
-	<body>
-		<h1>Student</h1>
-		<p>Open a console and then click the button</p>
-		<input type="button" value="Display student's data">
-		<p id="personalData"></p>
 
-		<script>
+<head>
+	<title>Student</title>
+	<meta charset="UTF-8">
+</head>
 
-		</script>
+<body>
+	<h1>Student</h1>
+	<p>Open a console and then click the button</p>
+	<input type="button" value="Display student's data" onclick="connect()">
+	<p id="personalData"></p>
 
-	</body>
+	<script>
+		function connect() {
+			var method = 'GET';
+			var URL = 'https://raw.githubusercontent.com/kbednarz/bai/solutions/04-JSON%26DataTransfer/personal_data.json';
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function () { display(this); };
+			xhr.open(method, URL);
+			xhr.send();
+		}
+		function display(r) {
+			if (r.readyState == 4 && r.status == 200) {
+				var data = JSON.parse(r.responseText);
+				document.getElementById('personalData').innerText = data.name + ' ' + data.surname;
+			}
+		};
+	</script>
+
+</body>
+
 </html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Chart</title>
+	<meta charset="UTF-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.bundle.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"
+		integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
+</head>
+
+<body>
+	<h1>Chart</h1>
+	<p>Gold price</p>
+	<div>
+		<canvas id="goldChart" width="400" height="400"></canvas>
+	</div>
+
+	<script>
+		function createChart(labels, data) {
+			new Chart(document.getElementById("goldChart"),
+				{
+					"type": "line",
+					"data": {
+						"labels": labels,
+						"datasets": [{ "label": "Price", "data": data, "fill": false, "borderColor": "rgb(75, 192, 192)", "lineTension": 0.1 }]
+					},
+					"options": {
+						responsive: false
+					}
+				});
+		}
+
+		$(document).ready(function () {
+			$.ajax({
+				dataType: 'json',
+				url: 'http://api.nbp.pl/api/cenyzlota/last/30/?format=json', success: function (result) {
+					var labels = [];
+					var data = [];
+					for (i = result.length - 10; i < result.length; i++) {
+						labels.push(result[i].data);
+						data.push(result[i].cena);
+					}
+
+					createChart(labels, data);
+				}
+			});
+		});
+	</script>
+
+</body>
+
+</html>
