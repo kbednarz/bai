@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
+
 <body>
+  <div id="app">
+    <h1>DO WYKONANIA</h1>
+    <ol>
+      <li v-for="item in orderedTodo">{{item}}</li>
+    </ol>
+  </div>
   <script>
     var app = new Vue({
       el: '#app',
@@ -13,9 +21,16 @@
           'Feed cat',
           'Pay cable bill',
           'Go shopping'
+        ]
+      },
+      computed: {
+        orderedTodo: function () {
+          return [...this.todo].sort();
+        }
       }
     });
   </script>
 
 </body>
+
 </html>

@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 </head>
+
 <body>
+  <div id="app">
+    <canvas id="langChart" width="400" height="400"></canvas>
+  </div>
   <script>
     var app = new Vue({
       el: '#app',
       data: {
-        films: [
-          {
+        films: [{
             language: 'Python',
             popularity: 25.95
           },
@@ -29,9 +34,30 @@
             language: 'Php',
             popularity: 7.37
           }
-        ] 
+        ]
+      },
+      computed: {
+        getChartData: function () {
+          return {
+            datasets: [{
+              data: this.films.map(f => f.popularity),
+              backgroundColor: ['#003f5c', '#58508d', '#bc5090', '#ff6361', '#ffa600']
+            }],
+            labels: this.films.map(f => f.language)
+          };
+        }
+      },
+      mounted() {
+        new Chart('langChart', {
+          type: 'doughnut',
+          data: this.getChartData,
+          options: {
+            responsive: false
+          }
+        });
       }
     });
   </script>
 </body>
+
 </html>

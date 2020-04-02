@@ -1,9 +1,22 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
+
 <body>
+  <div id="app">
+    <div>
+      EMPLOYEE RECORD<br>
+      <span>Name 1: {{name1}}<br></span>
+      <span v-if="name2">Name 2: {{name2}}<br></span>
+      <span>Surname : {{surname}}<br></span>
+      <span v-if="!foreigner">Pesel: {{pesel}}<br></span>
+      <span v-if="foreigner">Nationality: {{nationality}}<br></span>
+      <span>Address : {{address}}<br></span>
+    </div>
+  </div>
   <script>
     var app = new Vue({
       el: '#app',
@@ -15,8 +28,10 @@
         nationality: 'Polish',
         pesel: '92021708229',
         address: 'ul. Szeroka 3, Kraków',
+      }
     });
   </script>
 
 </body>
+
 </html>

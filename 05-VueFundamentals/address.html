@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-</head>
-<body>
-  <h1>Address</h1>    
 
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <h1>Address</h1>
+    <p>
+      {{name}} {{surname}}<br>
+      {{address}}<br>
+      {{postcode}} {{city}}
+    </p>
+  </div>
   <script>
     var app = new Vue({
       el: '#app',
@@ -20,4 +28,5 @@
   </script>
 
 </body>
+
 </html>
