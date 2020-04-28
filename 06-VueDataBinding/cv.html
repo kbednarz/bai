@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    #app>label {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <label for="name">Name: <input type="text" id="name" v-model="cv.name"></label>
+    <label for="surname">Surname: <input type="text" id="surname" v-model="cv.surname"></label>
+    <label for="age">Age: <input type="number" id="age" v-model.number="cv.age"></label>
+    <label for="sex">Sex:
+      <label for="sex">Man: <input type="radio" id="sex" value="M" v-model="cv.sex"></label>
+      <label for="sex">Woman: <input type="radio" id="sex" value="W" v-model="cv.sex"></label>
+    </label>
+    <label for="education">Education:
+      <select v-model="cv.education">
+        <option>None</option>
+        <option>Primary</option>
+        <option>Secondary</option>
+        <option>Higher</option>
+      </select>
+    </label>
+    <label for="skills">Skills:
+      <input type="checkbox" value="computer skills" v-model="cv.skills"><label>Computer skills</label>
+      <input type="checkbox" value="driving license" v-model="cv.skills"><label>Driving license</label>
+      <input type="checkbox" value="creativity" v-model="cv.skills"><label>Creativity</label>
+      <input type="checkbox" value="team worker" v-model="cv.skills"><label>Team worker</label>
+    </label>
+
+    <button v-on:click="print">Print</button>
+    <button v-on:click="save">Save</button>
+    <button v-on:click="read">Read</button>
+  </div>
+  <script>
+    var localStorage = window.localStorage | window.sessionStorage;
+    var app = new Vue({
+      el: '#app',
+      data: {
+        cv: {
+          name: '',
+          skills: []
+        }
+      },
+      methods: {
+        print: function () {
+          console.log(this.cv)
+        },
+        save: function () {
+          localStorage.setItem('cv', JSON.stringify(this.cv))
+        },
+        read: function () {
+          const cv = localStorage.getItem('cv');
+          if (cv) {          
+            this.cv = JSON.parse(cv);
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+
+</html>

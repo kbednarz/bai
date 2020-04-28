@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <input type="checkbox" id="Sub1" value="Sub1" v-model="subjects"><label for="sub1">Sub1</label>
+    <input type="checkbox" id="Sub2" value="Sub2" v-model="subjects"><label for="sub2">Sub2</label>
+    <input type="checkbox" id="Sub3" value="Sub3" v-model="subjects"><label for="sub3">Sub3</label>
+    <input type="checkbox" id="Sub4" value="Sub4" v-model="subjects"><label for="sub4">Sub4</label>
+    <input type="checkbox" id="Sub5" value="Sub5" v-model="subjects"><label for="sub5">Sub5</label>
+
+    <p>Selected {{amountOfSubjects}}</p>
+  </div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        subjects: []
+      },
+      computed: {
+        amountOfSubjects: function () {
+          return this.subjects.length;
+        }
+      }
+    });
+  </script>
+
+</body>
+
+</html>
