@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <movie title="Movie1" director="Director1" year="2020"></movie>
+    <movie title="Movie2" director="Director2" year="2019"></movie>
+    <movie title="Movie3" director="Director3" year="2018"></movie>
+  </div>
+  <script>
+    Vue.component('movie', {
+      props: ['title', 'director', 'year'],
+      template: '<p>{{ title }} {{director}} {{year}}</p>'
+    })
+
+    var app = new Vue({
+      el: '#app'
+    });
+  </script>
+</body>
+
+</html>

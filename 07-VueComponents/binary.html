@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <binary decimal="8"></binary>
+    <binary decimal="170"></binary>
+    <binary decimal="204"></binary>
+    <binary decimal="3855"></binary>
+  </div>
+  <script>
+    Vue.component('binary', {
+      props: ['decimal'],
+      template: '<p>{{decimal}}(10) = {{binary}}(2)</p>',
+      computed: {
+        binary: function () {
+          return parseInt(this.decimal, 10).toString(2);
+        }
+      }
+    })
+
+    var app = new Vue({
+      el: '#app',
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <h1>Architektura von Neumanna</h1>
+    <neumann v-for="item in items" v-bind:item="item"></neumann>
+  </div>
+  <script>
+    Vue.component('neumann', {
+      props: ['item'],
+      template: '<p>{{ item }}</p>'
+    })
+
+    var app = new Vue({
+      el: '#app',
+      data: {
+        items: ['pamiec komputerowa', 'jednostka sterujaca', 'jednostka arytmetyczno-logiczna', 'urzadzenia wejscia-wyjscia']
+      }
+    });
+  </script>
+</body>
+
+</html>

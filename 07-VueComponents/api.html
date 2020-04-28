@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <currency-info currency="USD"></currency-info>
+    <currency-info currency="EUR"></currency-info>
+  </div>
+  <script>
+    Vue.component('currency-info', {
+      props: ['currency'],
+      data: function () {
+        return {
+          data: null
+        }
+      },
+      template: '<p v-if="data">{{data.currency}} ({{data.code}}) - {{data.rates[0].mid}} PLN</p>',
+      mounted() {
+        var method = 'GET';
+        var URL = `http://api.nbp.pl/api/exchangerates/rates/A/${this.currency}`;
+        var xhr = new XMLHttpRequest();
+        const self = this;
+        xhr.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            self.data = JSON.parse(this.responseText);
+          }
+        };
+        xhr.open(method, URL);
+        xhr.send();
+      }
+    })
+
+    var app = new Vue({
+      el: '#app'
+    });
+  </script>
+</body>
+
+</html>

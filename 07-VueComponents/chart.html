@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <chart v-bind:dataset="films"></chart>
+  </div>
+  <script>
+    Vue.component('chart', {
+      props: ['dataset'],
+      template: '<canvas id="chart" width="400" height="400"></canvas>',
+      computed: {
+        getChartData: function () {
+          return {
+            datasets: [{
+              data: this.dataset.map(f => f.value),
+              backgroundColor: ['#003f5c', '#58508d', '#bc5090', '#ff6361', '#ffa600']
+            }],
+            labels: this.dataset.map(f => f.label)
+          };
+        }
+      },
+      mounted() {
+        new Chart('chart', {
+          type: 'doughnut',
+          data: this.getChartData,
+          options: {
+            responsive: false
+          }
+        });
+      }
+    })
+
+    var app = new Vue({
+      el: '#app',
+      data: {
+        films: [{
+          label: 'Python',
+          value: 25.95
+        },
+        {
+          label: 'Java',
+          value: 21.42
+        },
+        {
+          label: 'JavaScript',
+          value: 8.26
+        },
+        {
+          label: 'C#',
+          value: 7.62
+        },
+        {
+          label: 'Php',
+          value: 7.37
+        }]
+      },
+
+    });
+  </script>
+</body>
+
+</html>
